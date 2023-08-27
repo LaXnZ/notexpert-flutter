@@ -1,16 +1,5 @@
 # notexpert
 
-A new Flutter project.
+Mobile App Development Assignment (Sumuditha Lansakara - CB010718)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+NoteXpert is a mobile app that helps you take notes, save them, and add images to them. You can also scan documents and get the text into your notes, and use dark mode for a more comfortable viewing experience. NoteXpert makes it easy to take notes quickly and easily, and you can access them from anywhere.
