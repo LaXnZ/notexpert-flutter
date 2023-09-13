@@ -1,3 +1,4 @@
+import 'package:notexpert/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/constants/colors.dart';
@@ -29,7 +30,12 @@ class SplashScreen extends StatelessWidget {
           Positioned(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
