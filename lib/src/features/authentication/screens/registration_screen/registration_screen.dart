@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/constants/colors.dart';
-import 'package:notexpert/src/features/authentication/screens/registration_screen/registration_screen.dart';
+import 'package:notexpert/src/features/authentication/screens/login_screen/login_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegistrationScreen extends StatelessWidget {
+  const RegistrationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +58,10 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 70,
+                      height: 30,
                     ),
                     Text(
-                      'Sign In',
+                      'Sign Up',
                       style: TextStyle(
                         fontSize: 45,
                         fontWeight: FontWeight.bold,
@@ -70,12 +70,62 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     Form(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          TextFormField(
+                            style: TextStyle(
+                              fontSize: 14,
+                              color:
+                                  textColor, // Set the text color based on the theme
+                            ),
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.person),
+                              labelText: 'First Name',
+                              hintText: 'first name',
+                              hintStyle: TextStyle(
+                                fontSize: 14,
+                                color:
+                                    textColor, // Set the hint text color based on the theme
+                              ),
+                              labelStyle: TextStyle(
+                                fontSize: 14,
+                                color:
+                                    textColor, // Set the label text color based on the theme
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          TextFormField(
+                            style: TextStyle(
+                              fontSize: 14,
+                              color:
+                                  textColor, // Set the text color based on the theme
+                            ),
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.person),
+                              labelText: 'Last Name',
+                              hintText: 'last name',
+                              hintStyle: TextStyle(
+                                fontSize: 14,
+                                color:
+                                    textColor, // Set the hint text color based on the theme
+                              ),
+                              labelStyle: TextStyle(
+                                fontSize: 14,
+                                color:
+                                    textColor, // Set the label text color based on the theme
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
                           TextFormField(
                             style: TextStyle(
                               fontSize: 14,
@@ -99,7 +149,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 15,
                           ),
                           TextFormField(
                             style: TextStyle(
@@ -128,33 +178,66 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 15,
+                          ),
+                          TextFormField(
+                            style: TextStyle(
+                              fontSize: 14,
+                              color:
+                                  textColor, // Set the text color based on the theme
+                            ),
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.password),
+                              labelText: 'Confirm Password',
+                              hintText: AutofillHints.password,
+                              hintStyle: TextStyle(
+                                fontSize: 14,
+                                color:
+                                    textColor, // Set the hint text color based on the theme
+                              ),
+                              labelStyle: TextStyle(
+                                fontSize: 14,
+                                color:
+                                    textColor, // Set the label text color based on the theme
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: null,
+                                icon: Icon(Icons.remove_red_eye_sharp),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
                           ),
                           Align(
-                              alignment: Alignment.centerRight,
-                              child: TextButton(
-                                  onPressed: () {},
-                                  child: const Text(
-                                    'Forgot Password ?',
-                                    style: TextStyle(fontSize: 15),
-                                  ))),
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                'Forgot Password ?',
+                                style: TextStyle(fontSize: 15),
+                              ),
+                            ),
+                          ),
                           const SizedBox(
-                            height: 20,
+                            height: 15,
                           ),
                           SizedBox(
                             width: double.infinity,
                             height: 45,
                             child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: const Color(kPrimaryBlackColor),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8))),
-                                onPressed: () {},
-                                child: const Text(
-                                  'Sign In',
-                                  style: TextStyle(fontSize: 20),
-                                )),
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color(kPrimaryBlackColor),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: const Text(
+                                'Sign Up',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -218,7 +301,7 @@ class LoginScreen extends StatelessWidget {
                                       (context, animation, secondaryAnimation) {
                                     return FadeTransition(
                                       opacity: animation,
-                                      child: RegistrationScreen(),
+                                      child: LoginScreen(),
                                     );
                                   },
                                 ),
@@ -226,7 +309,7 @@ class LoginScreen extends StatelessWidget {
                             },
                             child: RichText(
                               text: TextSpan(
-                                text: 'Dont Have an Account ? ',
+                                text: 'Already Have an Account ? ',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -235,7 +318,7 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: 'Sign Up',
+                                    text: 'Sign In',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Color.fromARGB(255, 0, 117,
