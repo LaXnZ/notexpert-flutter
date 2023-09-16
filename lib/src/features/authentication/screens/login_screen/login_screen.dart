@@ -16,8 +16,18 @@ class LoginScreen extends StatelessWidget {
             height: screenHeight,
             decoration: BoxDecoration(
               image: DecorationImage(
+                colorFilter: ColorFilter.mode(
+                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                      ? Colors.black.withOpacity(0.1)
+                      : Colors.white.withOpacity(
+                          0.5), // Change the opacity value here (0.5 for 50% opacity)
+                  BlendMode.srcOver,
+                ),
                 image: AssetImage(
-                    kBackgroundImageLight), // Replace with your image path
+                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                      ? kBackgroundImageDark
+                      : kBackgroundImageLight,
+                ),
                 fit: BoxFit.cover,
               ),
             ),
@@ -61,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                               labelText: 'Email',
                               hintText: AutofillHints.email,
                               hintStyle: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 14,
                                   color: Color(kPrimaryBlackColor)),
                               labelStyle: TextStyle(
                                 fontSize: 14,
@@ -82,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                               labelText: 'Password',
                               hintText: AutofillHints.password,
                               hintStyle: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 14,
                                   color: Color(kPrimaryBlackColor)),
                               labelStyle: TextStyle(
                                 fontSize: 14,
@@ -100,7 +110,10 @@ class LoginScreen extends StatelessWidget {
                               alignment: Alignment.centerRight,
                               child: TextButton(
                                   onPressed: () {},
-                                  child: const Text('Forgot Password ?'))),
+                                  child: const Text(
+                                    'Forgot Password ?',
+                                    style: TextStyle(fontSize: 15),
+                                  ))),
                           const SizedBox(
                             height: 10,
                           ),
@@ -130,7 +143,8 @@ class LoginScreen extends StatelessWidget {
                       children: [
                         const Text(
                           'Or continue with',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(
                           height: 30,
@@ -165,7 +179,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
                         Align(
                           alignment: Alignment.center,
@@ -175,6 +189,8 @@ class LoginScreen extends StatelessWidget {
                               text: const TextSpan(
                                 text: 'Already Have an Account ? ',
                                 style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
                                   color: Colors
                                       .black, // Set the color for "Already Have an Account ?"
                                 ),
