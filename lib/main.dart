@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:notexpert/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:notexpert/src/utils/theme/theme.dart';
 

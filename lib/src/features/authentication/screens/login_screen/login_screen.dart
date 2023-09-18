@@ -15,9 +15,6 @@ class LoginScreen extends StatelessWidget {
         ? Color(kPrimaryWhiteColor) // Use white color for light theme
         : Color(kPrimaryBlackColor); // Use black color for dark theme
 
-    String logoAsset =
-        currentBrightness == Brightness.dark ? kLoginLogoDark : kLoginLogoLight;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: LayoutBuilder(
