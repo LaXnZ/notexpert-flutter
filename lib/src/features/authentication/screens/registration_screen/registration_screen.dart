@@ -206,18 +206,8 @@ class RegistrationScreen extends StatelessWidget {
                           const SizedBox(
                             height: 15,
                           ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                'Forgot Password ?',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                            ),
-                          ),
                           const SizedBox(
-                            height: 15,
+                            height: 10,
                           ),
                           SizedBox(
                             width: double.infinity,
