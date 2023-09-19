@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notexpert/src/features/authentication/screens/homepage_screen/home_screen.dart';
+import 'package:notexpert/src/features/authentication/screens/search_notes_screen/search_notes_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:notexpert/src/utils/theme/theme.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: CustomAppTheme.lightTheme,
       darkTheme: CustomAppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const HomePage(),
+      home: const SearchNotes(),
     );
   }
 }
