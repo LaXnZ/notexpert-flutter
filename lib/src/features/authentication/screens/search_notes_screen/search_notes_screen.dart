@@ -1,26 +1,67 @@
 import 'package:flutter/material.dart';
-import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:notexpert/models/note.dart';
 
-class SearchNotes extends StatelessWidget {
+class SearchNotes extends StatefulWidget {
   const SearchNotes({super.key});
+
+  @override
+  State<SearchNotes> createState() => _SearchNotesState();
+}
+
+class _SearchNotesState extends State<SearchNotes> {
+  List<Note> filteredNotes = [];
+  bool sorted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    filteredNotes = sampleNotes;
+  }
+
+  List<Note> sortNotesByModifiedTime(List<Note> notes) {
+    if (sorted) {
+      notes.sort((a, b) => a.modifiedTime.compareTo(b.modifiedTime));
+    } else {
+      notes.sort((b, a) => b.modifiedTime.compareTo(a.modifiedTime));
+    }
+
+    sorted = !sorted;
+
+    return notes;
+  }
+
+  void onSearchTextChanged(String searchText) {
+    setState(() {
+      filteredNotes = sampleNotes
+          .where((note) =>
+              note.content.toLowerCase().contains(searchText.toLowerCase()) ||
+              note.title.toLowerCase().contains(searchText.toLowerCase()))
+          .toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.menu, color: Colors.black),
+        leading:
+            const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
         title: Row(
           children: [
-            Expanded(
-              child: Align(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  kHomePageLogo,
-                  width: 100.0,
-                ),
+            Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(left: 40.0),
+              child: Expanded(
+                child: Text('Search Notes',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      color: Color(kPrimaryBlackColor),
+                    )),
               ),
             ),
           ],
@@ -32,11 +73,21 @@ class SearchNotes extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(right: 16.0, top: 5),
             decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10.0)),
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(10.0),
+            ),
             child: IconButton(
-              onPressed: () {},
-              icon: const Image(image: AssetImage(kUserProfileImage)),
+              padding: EdgeInsets.zero,
+              onPressed: () {
+                setState(() {
+                  filteredNotes = sortNotesByModifiedTime(filteredNotes);
+                });
+              },
+              icon: Icon(
+                Icons.sort,
+                color: Color(kPrimaryBlackColor),
+                size: 25,
+              ),
             ),
           )
         ],
@@ -47,6 +98,7 @@ class SearchNotes extends StatelessWidget {
           children: [
             const SizedBox(height: 20.0),
             TextField(
+                onChanged: onSearchTextChanged,
                 style: TextStyle(
                   fontSize: 17.0,
                   color: Color(
@@ -67,7 +119,7 @@ class SearchNotes extends StatelessWidget {
             const SizedBox(height: 20.0),
             Expanded(
                 child: ListView.builder(
-              itemCount: sampleNotes.length,
+              itemCount: filteredNotes.length,
               itemBuilder: (context, index) {
                 return Container(
                   child: Card(
@@ -82,14 +134,14 @@ class SearchNotes extends StatelessWidget {
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(
-                          text: '${sampleNotes[index].title} \n',
+                          text: '${filteredNotes[index].title} \n',
                           style: TextStyle(
                             fontSize: 17.0,
                             color: Color(kPrimaryBlackColor),
                           ),
                           children: [
                             TextSpan(
-                              text: '${sampleNotes[index].content} \n',
+                              text: '${filteredNotes[index].content} \n',
                               style: TextStyle(
                                 fontSize: 17.0,
                                 color: Color(kPrimaryBlackColor),
@@ -102,7 +154,7 @@ class SearchNotes extends StatelessWidget {
                       contentPadding: EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 20.0),
                       subtitle: Text(
-                        '\nLast edited on ${DateFormat('EEE MMM d, yyyy h:mm a').format(sampleNotes[index].modifiedTime)}',
+                        '\nLast edited on ${DateFormat('EEE MMM d, yyyy h:mm a').format(filteredNotes[index].modifiedTime)}',
                         style: TextStyle(
                           fontSize: 12.0,
                           fontStyle: FontStyle.italic,
