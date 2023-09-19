@@ -18,7 +18,7 @@ List<Note> sampleNotes = [
     id: 0,
     title: 'Like and Subscribe',
     content:
-        'A FREE way to support the channel is to give us a LIKE . It does not cost you but means a lot to us.\nIf you are new here please Subscribe',
+        'Physical space is often conceived in three linear dimensions, although modern physici...',
     modifiedTime: DateTime(2022,1,1,34,5),
   ),
   Note(
@@ -74,5 +74,19 @@ List<Note> sampleNotes = [
     content:
         '1. Visit Grand Canyon\n2. Go on a hot air balloon ride\n3. Try local cuisine\n4. Attend a concert',
     modifiedTime: DateTime(2023,2,1,12,34),
+  ),
+  Note(
+    id: 9,
+    title: 'The Power of Imagination',
+    content:
+      'Imagination is the ability to create mental images or ideas that are not real. It is a powerful tool that can be used for many different things, such as solving problems, coming up with new ideas, and creating art and literature.',
+    modifiedTime: DateTime.now(),
+  ),
+  Note(
+    id: 10,
+    title: 'Grocery list',
+    content:
+      '* Milk\n* Eggs\n* Bread\n* Bananas\n* Apples\n* Carrots\n* Celery\n* Onions\n* Potatoes\n* Chicken\n* Beef',
+    modifiedTime: DateTime.now(),
   ),
 ];

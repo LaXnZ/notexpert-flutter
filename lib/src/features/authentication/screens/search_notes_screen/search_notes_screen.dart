@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:intl/intl.dart';
-import 'package:notexpert/models/note.dart';
+import 'package:notexpert/src/features/authentication/models/note.dart';
 
 class SearchNotes extends StatefulWidget {
   const SearchNotes({super.key});
@@ -131,11 +131,12 @@ class _SearchNotesState extends State<SearchNotes> {
                     color: Color.fromARGB(87, 112, 184, 202),
                     child: ListTile(
                       title: RichText(
-                        maxLines: 3,
+                        maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(
                           text: '${filteredNotes[index].title} \n',
                           style: TextStyle(
+                            fontWeight: FontWeight.bold,
                             fontSize: 17.0,
                             color: Color(kPrimaryBlackColor),
                           ),
@@ -144,8 +145,8 @@ class _SearchNotesState extends State<SearchNotes> {
                               text: '${filteredNotes[index].content} \n',
                               style: TextStyle(
                                 fontSize: 17.0,
+                                fontWeight: FontWeight.normal,
                                 color: Color(kPrimaryBlackColor),
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -159,13 +160,6 @@ class _SearchNotesState extends State<SearchNotes> {
                           fontSize: 12.0,
                           fontStyle: FontStyle.italic,
                           color: Colors.grey.shade700,
-                        ),
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.delete,
-                          color: Colors.black38,
                         ),
                       ),
                     ),

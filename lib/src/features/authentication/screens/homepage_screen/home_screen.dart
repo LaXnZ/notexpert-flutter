@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:notexpert/models/note.dart';
+import 'package:notexpert/src/features/authentication/models/note.dart';
 import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:intl/intl.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void deleteNote(int index) {
+    setState(() {
+      sampleNotes.removeAt(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +73,12 @@ class HomePage extends StatelessWidget {
                       color: Color.fromARGB(87, 112, 184, 202),
                       child: ListTile(
                         title: RichText(
-                          maxLines: 3,
+                          maxLines: 4,
                           overflow: TextOverflow.ellipsis,
                           text: TextSpan(
                             text: '${sampleNotes[index].title} \n',
                             style: TextStyle(
+                              fontWeight: FontWeight.bold,
                               fontSize: 17.0,
                               color: Color(kPrimaryBlackColor),
                             ),
@@ -75,8 +87,8 @@ class HomePage extends StatelessWidget {
                                 text: '${sampleNotes[index].content} \n',
                                 style: TextStyle(
                                   fontSize: 17.0,
+                                  fontWeight: FontWeight.normal,
                                   color: Color(kPrimaryBlackColor),
-                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
@@ -93,7 +105,82 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         trailing: IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            final result = await showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                    icon: const Icon(Icons.info_outline,
+                                        color: Color.fromARGB(206, 0, 0, 0)),
+                                    backgroundColor:
+                                        Color.fromARGB(227, 234, 237, 238),
+                                    title: Text(
+                                      'Are you sure you want to delete this note?',
+                                      style: TextStyle(
+                                          color: const Color.fromARGB(
+                                              255, 34, 34, 34),
+                                          fontSize: 24),
+                                    ),
+                                    content: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context, true);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Color.fromARGB(
+                                                  255, 74, 140, 201),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                            ),
+                                            child: SizedBox(
+                                              width: 60,
+                                              child: Text(
+                                                'Yes',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: const Color.fromARGB(
+                                                        255, 34, 34, 34)),
+                                              ),
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context, false);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Color.fromARGB(
+                                                  255, 201, 74, 74),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                            ),
+                                            child: SizedBox(
+                                              width: 60,
+                                              child: Text(
+                                                'No',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: const Color.fromARGB(
+                                                        255, 34, 34, 34)),
+                                              ),
+                                            ),
+                                          )
+                                        ]),
+                                  );
+                                });
+                            if (result != null && result == true) {
+                              deleteNote(index);
+                            }
+                          },
                           icon: Icon(
                             Icons.delete,
                             color: Colors.black38,
