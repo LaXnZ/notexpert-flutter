@@ -3,6 +3,7 @@ import 'package:notexpert/src/features/authentication/models/note.dart';
 import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:intl/intl.dart';
+import 'package:notexpert/src/features/authentication/screens/edit_screen/edit_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +15,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   void deleteNote(int index) {
     setState(() {
+      Note note = sampleNotes[index];
+      sampleNotes.remove(note);
       sampleNotes.removeAt(index);
     });
   }
@@ -55,7 +58,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
           child: Column(
             children: [
               const SizedBox(height: 20.0),
@@ -195,8 +198,24 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          elevation: 0.5,
+          onPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => const EditScreen(),
+              ),
+            );
+            if (result != null) {
+              setState(() {
+                sampleNotes.add(Note(
+                    id: sampleNotes.length,
+                    title: result[0],
+                    content: result[1],
+                    modifiedTime: DateTime.now()));
+              });
+            }
+          },
+          elevation: 1,
           backgroundColor: Color.fromARGB(96, 2, 70, 97),
           child: Icon(Icons.add,
               size: 30, color: Color.fromARGB(255, 255, 255, 255)),

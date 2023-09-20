@@ -55,7 +55,7 @@ class RegistrationScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 70,
                     ),
                     Text(
                       'Sign Up',
