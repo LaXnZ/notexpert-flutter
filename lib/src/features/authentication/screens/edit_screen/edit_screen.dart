@@ -1,9 +1,14 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:notexpert/src/features/authentication/screens/homepage_screen/home_screen.dart';
 
+import '../../models/note.dart';
+
 class EditScreen extends StatefulWidget {
-  const EditScreen({super.key});
+  final Note? note;
+  const EditScreen({super.key, this.note});
 
   @override
   State<EditScreen> createState() => _EditScreenState();
@@ -12,6 +17,15 @@ class EditScreen extends StatefulWidget {
 class _EditScreenState extends State<EditScreen> {
   TextEditingController _titleController = TextEditingController();
   TextEditingController _noteController = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.note != null) {
+      _titleController.text = widget.note!.title;
+      _noteController.text = widget.note!.content;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +78,7 @@ class _EditScreenState extends State<EditScreen> {
                       color: const Color.fromARGB(226, 0, 0, 0),
                       fontWeight: FontWeight.bold,
                     ),
+                    maxLines: null,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Type your note here..',

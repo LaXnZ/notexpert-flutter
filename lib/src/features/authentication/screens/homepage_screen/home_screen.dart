@@ -75,6 +75,34 @@ class _HomePageState extends State<HomePage> {
                       elevation: 0,
                       color: Color.fromARGB(87, 112, 184, 202),
                       child: ListTile(
+                        onTap: () async {
+                          final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => EditScreen(
+                                note: sampleNotes[index],
+                              ),
+                            ),
+                          );
+                          if (result != null) {
+                            setState(() {
+                              int originalIndex =
+                                  sampleNotes.indexOf(sampleNotes[index]);
+
+                              sampleNotes[originalIndex] = Note(
+                                  id: sampleNotes[originalIndex].id,
+                                  title: result[0],
+                                  content: result[1],
+                                  modifiedTime: DateTime.now());
+
+                              sampleNotes[index] = Note(
+                                  id: sampleNotes[index].id,
+                                  title: result[0],
+                                  content: result[1],
+                                  modifiedTime: DateTime.now());
+                            });
+                          }
+                        },
                         title: RichText(
                           maxLines: 4,
                           overflow: TextOverflow.ellipsis,
