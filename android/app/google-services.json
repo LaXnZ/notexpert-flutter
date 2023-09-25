@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "520772731316",
+    "project_id": "notexpert-cc0d7",
+    "storage_bucket": "notexpert-cc0d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520772731316:android:3b765081c79d5034f9b2e1",
+        "android_client_info": {
+          "package_name": "com.example.notexpert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqx8pBgeInlQdndYL5CKk_mhMXgT8Y5O4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

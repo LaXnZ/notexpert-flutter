@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:notexpert/src/features/authentication/screens/login_screen/login_screen.dart';
+import 'package:notexpert/src/features/authentication/controller/signup_controller.dart';
 
 class RegistrationScreen extends StatelessWidget {
   const RegistrationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignUpController());
+    final _formKey = GlobalKey<FormState>();
+
     Brightness currentBrightness = Theme.of(context).brightness;
 
-    // Define the text color based on the theme brightness
     Color textColor = currentBrightness == Brightness.dark
-        ? Color(kPrimaryWhiteColor) // Use white color for light theme
-        : Color(kPrimaryBlackColor); // Use black color for dark theme
+        ? Color(kPrimaryWhiteColor)
+        : Color(kPrimaryBlackColor);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -27,8 +31,7 @@ class RegistrationScreen extends StatelessWidget {
                 colorFilter: ColorFilter.mode(
                   MediaQuery.of(context).platformBrightness == Brightness.dark
                       ? Colors.black.withOpacity(0.4)
-                      : Colors.white.withOpacity(
-                          0.5), // Change the opacity value here (0.5 for 50% opacity)
+                      : Colors.white.withOpacity(0.5),
                   BlendMode.srcOver,
                 ),
                 image: AssetImage(
@@ -62,22 +65,22 @@ class RegistrationScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 45,
                         fontWeight: FontWeight.bold,
-                        color:
-                            textColor, // Set the text color based on the theme
+                        color: textColor,
                       ),
                     ),
                     const SizedBox(
                       height: 15,
                     ),
                     Form(
+                      key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFormField(
+                            controller: controller.firstname,
                             style: TextStyle(
                               fontSize: 14,
-                              color:
-                                  textColor, // Set the text color based on the theme
+                              color: textColor,
                             ),
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.person),
@@ -85,13 +88,11 @@ class RegistrationScreen extends StatelessWidget {
                               hintText: 'first name',
                               hintStyle: TextStyle(
                                 fontSize: 14,
-                                color:
-                                    textColor, // Set the hint text color based on the theme
+                                color: textColor,
                               ),
                               labelStyle: TextStyle(
                                 fontSize: 14,
-                                color:
-                                    textColor, // Set the label text color based on the theme
+                                color: textColor,
                               ),
                             ),
                           ),
@@ -99,10 +100,10 @@ class RegistrationScreen extends StatelessWidget {
                             height: 15,
                           ),
                           TextFormField(
+                            controller: controller.lastname,
                             style: TextStyle(
                               fontSize: 14,
-                              color:
-                                  textColor, // Set the text color based on the theme
+                              color: textColor,
                             ),
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.person),
@@ -110,13 +111,11 @@ class RegistrationScreen extends StatelessWidget {
                               hintText: 'last name',
                               hintStyle: TextStyle(
                                 fontSize: 14,
-                                color:
-                                    textColor, // Set the hint text color based on the theme
+                                color: textColor,
                               ),
                               labelStyle: TextStyle(
                                 fontSize: 14,
-                                color:
-                                    textColor, // Set the label text color based on the theme
+                                color: textColor,
                               ),
                             ),
                           ),
@@ -124,10 +123,10 @@ class RegistrationScreen extends StatelessWidget {
                             height: 15,
                           ),
                           TextFormField(
+                            controller: controller.email,
                             style: TextStyle(
                               fontSize: 14,
-                              color:
-                                  textColor, // Set the text color based on the theme
+                              color: textColor,
                             ),
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.mail_outline),
@@ -135,13 +134,11 @@ class RegistrationScreen extends StatelessWidget {
                               hintText: AutofillHints.email,
                               hintStyle: TextStyle(
                                 fontSize: 14,
-                                color:
-                                    textColor, // Set the hint text color based on the theme
+                                color: textColor,
                               ),
                               labelStyle: TextStyle(
                                 fontSize: 14,
-                                color:
-                                    textColor, // Set the label text color based on the theme
+                                color: textColor,
                               ),
                             ),
                           ),
@@ -149,10 +146,10 @@ class RegistrationScreen extends StatelessWidget {
                             height: 15,
                           ),
                           TextFormField(
+                            controller: controller.password,
                             style: TextStyle(
                               fontSize: 14,
-                              color:
-                                  textColor, // Set the text color based on the theme
+                              color: textColor,
                             ),
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.password),
@@ -160,42 +157,11 @@ class RegistrationScreen extends StatelessWidget {
                               hintText: AutofillHints.password,
                               hintStyle: TextStyle(
                                 fontSize: 14,
-                                color:
-                                    textColor, // Set the hint text color based on the theme
+                                color: textColor,
                               ),
                               labelStyle: TextStyle(
                                 fontSize: 14,
-                                color:
-                                    textColor, // Set the label text color based on the theme
-                              ),
-                              suffixIcon: IconButton(
-                                onPressed: null,
-                                icon: Icon(Icons.remove_red_eye_sharp),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            style: TextStyle(
-                              fontSize: 14,
-                              color:
-                                  textColor, // Set the text color based on the theme
-                            ),
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.password),
-                              labelText: 'Confirm Password',
-                              hintText: AutofillHints.password,
-                              hintStyle: TextStyle(
-                                fontSize: 14,
-                                color:
-                                    textColor, // Set the hint text color based on the theme
-                              ),
-                              labelStyle: TextStyle(
-                                fontSize: 14,
-                                color:
-                                    textColor, // Set the label text color based on the theme
+                                color: textColor,
                               ),
                               suffixIcon: IconButton(
                                 onPressed: null,
@@ -219,7 +185,14 @@ class RegistrationScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  SignUpController.instance.registerUser(
+                                    controller.email.text.trim(),
+                                    controller.password.text.trim(),
+                                  );
+                                }
+                              },
                               child: const Text(
                                 'Sign Up',
                                 style: TextStyle(fontSize: 20),
@@ -253,8 +226,7 @@ class RegistrationScreen extends StatelessWidget {
                               shape: MaterialStateProperty.all<
                                   RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      8.0), // Adjust the radius as needed
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
                             ),
@@ -300,16 +272,14 @@ class RegistrationScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color:
-                                      textColor, // Set the text color based on the theme
+                                  color: textColor,
                                 ),
                                 children: [
                                   TextSpan(
                                     text: 'Sign In',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 0, 117,
-                                          175), // Use textColor here
+                                      color: Color.fromARGB(255, 0, 117, 175),
                                     ),
                                   ),
                                 ],
