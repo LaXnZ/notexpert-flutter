@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:notexpert/src/features/authentication/screens/registration_screen/registration_screen.dart';
+import 'package:notexpert/src/features/authentication/controller/signin_controller.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -9,6 +11,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Brightness currentBrightness = Theme.of(context).brightness;
+    final controller = Get.put(SignInController());
+    final _formKey = GlobalKey<FormState>();
 
     // Define the text color based on the theme brightness
     Color textColor = currentBrightness == Brightness.dark
@@ -70,10 +74,12 @@ class LoginScreen extends StatelessWidget {
                       height: 20,
                     ),
                     Form(
+                      key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFormField(
+                            controller: controller.email,
                             style: TextStyle(
                               fontSize: 14,
                               color:
@@ -99,6 +105,7 @@ class LoginScreen extends StatelessWidget {
                             height: 20,
                           ),
                           TextFormField(
+                            controller: controller.password,
                             style: TextStyle(
                               fontSize: 14,
                               color:
@@ -147,7 +154,14 @@ class LoginScreen extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8))),
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    SignInController.instance.loginUser(
+                                      controller.email.text.trim(),
+                                      controller.password.text.trim(),
+                                    );
+                                  }
+                                },
                                 child: const Text(
                                   'Sign In',
                                   style: TextStyle(fontSize: 20),
