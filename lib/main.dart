@@ -12,9 +12,9 @@ import 'package:notexpert/src/repository/authentication_repository/authenticatio
 import 'package:notexpert/src/utils/theme/theme.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((value) => Get.put(AuthenticationRepository()));
+  // WidgetsFlutterBinding.ensureInitialized();
+  // Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+  //     .then((value) => Get.put(AuthenticationRepository()));
   runApp(const MyApp());
 }
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: CustomAppTheme.lightTheme,
       darkTheme: CustomAppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const ProfileScreen(),
+      home: const HomePage(),
     );
   }
 }

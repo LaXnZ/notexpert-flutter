@@ -4,6 +4,7 @@ import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:notexpert/src/features/authentication/screens/edit_screen/edit_screen.dart';
+import 'package:notexpert/src/features/authentication/screens/profile/profile_screen.dart';
 import 'package:notexpert/src/repository/authentication_repository/authentication_repository.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,7 +54,14 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(10.0)),
               child: IconButton(
                 onPressed: () {
-                  AuthenticationRepository.instance.signOut();
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          const ProfileScreen(),
+                      transitionDuration: const Duration(seconds: 0),
+                    ),
+                  );
                 },
                 icon: const Image(image: AssetImage(kUserProfileImage)),
               ),
