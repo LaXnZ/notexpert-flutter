@@ -6,6 +6,7 @@ import 'package:notexpert/src/features/authentication/screens/edit_screen/edit_s
 import 'package:notexpert/src/features/authentication/screens/homepage_screen/home_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/profile/profile_screen.dart';
+import 'package:notexpert/src/features/authentication/screens/profile/update_profile_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/search_notes_screen/search_notes_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:notexpert/src/repository/authentication_repository/authentication_repository.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: CustomAppTheme.lightTheme,
       darkTheme: CustomAppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const HomePage(),
+      home: const UpdateProfileScreen(),
     );
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:notexpert/src/features/authentication/models/note.dart';
+
+import '../../../../constants/sizes.dart';
 
 class SearchNotes extends StatefulWidget {
   const SearchNotes({super.key});
@@ -46,18 +49,20 @@ class _SearchNotesState extends State<SearchNotes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading:
-            const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
+        leading: IconButton(
+            onPressed: () => {Get.back()},
+            icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                color: Colors.black)),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.only(left: 40.0),
               child: Expanded(
                 child: Text('Search Notes',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 30.0,
+                      fontSize: kTitleFontSize,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       color: Color(kPrimaryBlackColor),
