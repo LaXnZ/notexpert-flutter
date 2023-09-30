@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0)),
             child: IconButton(
               onPressed: () {
-                AuthenticationRepository.instance.signOut();
+                AuthenticationRepository.instance.signOut(context);
               },
               iconSize: 35,
               icon: const Icon(

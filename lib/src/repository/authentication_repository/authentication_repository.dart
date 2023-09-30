@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:notexpert/src/features/authentication/screens/homepage_screen/home_screen.dart';
+import 'package:notexpert/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:notexpert/src/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
 
@@ -52,5 +53,18 @@ class AuthenticationRepository extends GetxController {
     } catch (_) {}
   }
 
-  Future<void> signOut() async => await _auth.signOut();
+  Future<void> signOut(BuildContext context) async {
+    try {
+      final FirebaseAuth _auth = FirebaseAuth.instance;
+      await _auth.signOut();
+
+      // After successful sign out, navigate to the login screen.
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    } catch (e) {
+      print('Error signing out: $e');
+      // Handle sign-out error
+    }
+  }
 }

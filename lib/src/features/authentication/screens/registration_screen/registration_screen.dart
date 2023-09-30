@@ -5,6 +5,8 @@ import 'package:notexpert/src/constants/colors.dart';
 import 'package:notexpert/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:notexpert/src/features/authentication/controller/signup_controller.dart';
 
+import '../../models/user.dart';
+
 class RegistrationScreen extends StatelessWidget {
   const RegistrationScreen({super.key});
 
@@ -187,10 +189,19 @@ class RegistrationScreen extends StatelessWidget {
                               ),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  SignUpController.instance.registerUser(
-                                    controller.email.text.trim(),
-                                    controller.password.text.trim(),
+                                  // SignUpController.instance.registerUser(
+                                  //   controller.email.text.trim(),
+                                  //   controller.password.text.trim(),
+                                  // );
+
+                                  final user = User(
+                                    firstName: controller.firstname.text.trim(),
+                                    lastName: controller.lastname.text.trim(),
+                                    email: controller.email.text.trim(),
+                                    password: controller.password.text.trim(),
                                   );
+
+                                  SignUpController.instance.createUser(user);
                                 }
                               },
                               child: const Text(

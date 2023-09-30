@@ -7,15 +7,16 @@ import 'package:notexpert/src/features/authentication/screens/homepage_screen/ho
 import 'package:notexpert/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/profile/profile_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/profile/update_profile_screen.dart';
+import 'package:notexpert/src/features/authentication/screens/registration_screen/registration_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/search_notes_screen/search_notes_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:notexpert/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:notexpert/src/utils/theme/theme.dart';
 
 void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-  //     .then((value) => Get.put(AuthenticationRepository()));
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((value) => Get.put(AuthenticationRepository()));
   runApp(const MyApp());
 }
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: CustomAppTheme.lightTheme,
       darkTheme: CustomAppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const UpdateProfileScreen(),
+      home: const SplashScreen(),
     );
   }
 }
