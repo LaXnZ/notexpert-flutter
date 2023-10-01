@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:notexpert/src/common_widgets/navbar.dart';
 import 'package:notexpert/src/features/authentication/models/note.dart';
 import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:notexpert/src/features/authentication/screens/edit_screen/edit_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/profile/profile_screen.dart';
-import 'package:notexpert/src/repository/authentication_repository/authentication_repository.dart';
+import 'package:notexpert/src/features/authentication/screens/search_notes_screen/search_notes_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,6 +23,34 @@ class _HomePageState extends State<HomePage> {
       sampleNotes.remove(note);
       sampleNotes.removeAt(index);
     });
+  }
+
+  final List<Widget> _screens = [
+    const HomePage(),
+    const SearchNotes(),
+    const ProfileScreen(),
+    const ProfileScreen(),
+  ];
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => _screens[index],
+        transitionsBuilder: (context, animation1, animation2, child) {
+          return FadeTransition(
+            opacity: animation1,
+            child: child,
+          );
+        },
+       
+      ),
+    );
   }
 
   @override
@@ -69,7 +99,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
+          padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
           child: Column(
             children: [
               const SizedBox(height: 20.0),
@@ -235,6 +265,10 @@ class _HomePageState extends State<HomePage> {
               ))
             ],
           ),
+        ),
+        bottomNavigationBar: CustomNavBar(
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {

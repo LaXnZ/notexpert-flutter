@@ -4,7 +4,10 @@ import 'package:notexpert/src/constants/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:notexpert/src/features/authentication/models/note.dart';
 
+import '../../../../common_widgets/navbar.dart';
 import '../../../../constants/sizes.dart';
+import '../homepage_screen/home_screen.dart';
+import '../profile/profile_screen.dart';
 
 class SearchNotes extends StatefulWidget {
   const SearchNotes({super.key});
@@ -43,6 +46,33 @@ class _SearchNotesState extends State<SearchNotes> {
               note.title.toLowerCase().contains(searchText.toLowerCase()))
           .toList();
     });
+  }
+
+  final List<Widget> _screens = [
+    const HomePage(),
+    const SearchNotes(),
+    const ProfileScreen(),
+    const ProfileScreen(),
+  ];
+
+  int _selectedIndex = 1;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => _screens[index],
+        transitionsBuilder: (context, animation1, animation2, child) {
+          return FadeTransition(
+            opacity: animation1,
+            child: child,
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -174,6 +204,10 @@ class _SearchNotesState extends State<SearchNotes> {
             ))
           ],
         ),
+      ),
+      bottomNavigationBar: CustomNavBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }

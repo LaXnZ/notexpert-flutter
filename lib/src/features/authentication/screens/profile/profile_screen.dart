@@ -2,16 +2,51 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:notexpert/src/features/authentication/screens/homepage_screen/home_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/profile/update_profile_screen.dart';
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/repository/authentication_repository/authentication_repository.dart';
 
+import '../../../../common_widgets/navbar.dart';
 import '../../controller/profile_controller.dart';
 import '../../models/user.dart';
+import '../search_notes_screen/search_notes_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final List<Widget> _screens = [
+    const HomePage(),
+    const SearchNotes(),
+    const ProfileScreen(),
+    const ProfileScreen(),
+  ];
+
+  int _selectedIndex = 3;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => _screens[index],
+        transitionsBuilder: (context, animation1, animation2, child) {
+          return FadeTransition(
+            opacity: animation1,
+            child: child,
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +59,11 @@ class ProfileScreen extends StatelessWidget {
         leadingWidth: double.infinity,
         toolbarHeight: 110.0,
         leading: IconButton(
-          icon: IconButton(onPressed: () {}, icon: Image.asset(kHomePageLogo)),
+          icon: IconButton(
+              onPressed: () {
+                Get.to(() => const HomePage());
+              },
+              icon: Image.asset(kHomePageLogo)),
           onPressed: () {},
           iconSize: 90,
           alignment: Alignment.centerLeft,
@@ -73,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
                             height: 130,
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100),
-                                child: Image(
+                                child: const Image(
                                     image: AssetImage(kUserProfileImage))),
                           ),
                           Positioned(
@@ -100,7 +139,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       Text(
                         firstname + ' ' + lastname,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 23,
                             fontWeight: FontWeight.bold,
                             color: Color(kPrimaryBlackColor)),
@@ -110,7 +149,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       Text(
                         email,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
                             color: Color(kPrimaryBlackColor)),
@@ -333,7 +372,7 @@ class ProfileScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100.0),
                               color: kDefaultIconDarkColor.withOpacity(0.1)),
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_forward_ios_rounded,
                             color: Colors.grey,
                             size: 18,
@@ -367,7 +406,7 @@ class ProfileScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100.0),
                               color: kDefaultIconDarkColor.withOpacity(0.1)),
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_forward_ios_rounded,
                             color: Colors.grey,
                             size: 18,
@@ -379,14 +418,18 @@ class ProfileScreen extends StatelessWidget {
                 } else if (snapshot.hasError) {
                   return Center(child: Text(snapshot.error.toString()));
                 } else {
-                  return Center(child: Text("Something went wrong"));
+                  return const Center(child: Text("Something went wrong"));
                 }
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             },
           ),
         ),
+      ),
+      bottomNavigationBar: CustomNavBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }

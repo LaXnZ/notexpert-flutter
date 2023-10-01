@@ -4,12 +4,37 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:notexpert/src/constants/sizes.dart';
 import 'package:notexpert/src/features/authentication/models/user.dart';
+import 'package:notexpert/src/features/authentication/screens/profile/profile_screen.dart';
+import '../../../../common_widgets/navbar.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
 import '../../controller/profile_controller.dart';
+import '../homepage_screen/home_screen.dart';
+import '../search_notes_screen/search_notes_screen.dart';
 
-class UpdateProfileScreen extends StatelessWidget {
+class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key});
+
+  @override
+  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
+}
+
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
+  List<Widget> _screens = [
+    HomePage(),
+    SearchNotes(),
+    ProfileScreen(),
+    ProfileScreen(),
+  ];
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      Get.to(_screens[index]);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -272,6 +297,10 @@ class UpdateProfileScreen extends StatelessWidget {
             },
           ),
         ),
+      ),
+      bottomNavigationBar: CustomNavBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }
