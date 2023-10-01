@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     Brightness currentBrightness = Theme.of(context).brightness;
-    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
     final controller = Get.put(SignInController());
 
     bool isObsecured = true;
@@ -36,14 +36,16 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 colorFilter: ColorFilter.mode(
-                  isDark
+                  currentBrightness == Brightness.dark
                       ? Colors.black.withOpacity(0.4)
                       : Colors.white.withOpacity(
                           0.5), // Change the opacity value here (0.5 for 50% opacity)
                   BlendMode.srcOver,
                 ),
                 image: AssetImage(
-                  isDark ? kBackgroundImageDark : kBackgroundImageLight,
+                  currentBrightness == Brightness.dark
+                      ? kBackgroundImageDark
+                      : kBackgroundImageLight,
                 ),
                 fit: BoxFit.cover,
               ),
@@ -60,8 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Center(
                       child: Image(
-                        image: AssetImage(
-                            isDark ? kLoginLogoDark : kLoginLogoLight),
+                        image: AssetImage(currentBrightness == Brightness.dark
+                            ? kLoginLogoDark
+                            : kLoginLogoLight),
                       ),
                     ),
                     const SizedBox(

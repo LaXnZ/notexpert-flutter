@@ -4,41 +4,15 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:notexpert/src/constants/sizes.dart';
 import 'package:notexpert/src/features/authentication/models/user.dart';
-import 'package:notexpert/src/features/authentication/screens/profile/profile_screen.dart';
-import '../../../../common_widgets/navbar.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
 import '../../controller/profile_controller.dart';
-import '../homepage_screen/home_screen.dart';
-import '../search_notes_screen/search_notes_screen.dart';
 
-class UpdateProfileScreen extends StatefulWidget {
+class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({super.key});
 
   @override
-  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
-}
-
-class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
-  List<Widget> _screens = [
-    HomePage(),
-    SearchNotes(),
-    ProfileScreen(),
-    ProfileScreen(),
-  ];
-
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      Get.to(_screens[index]);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     final controller = Get.put(ProfileController());
     Brightness currentBrightness = Theme.of(context).brightness;
 
@@ -50,8 +24,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => {Navigator.of(context).pop()},
-            icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                color: Colors.black)),
+            icon: Icon(Icons.arrow_back_ios_new_rounded,
+                //change color is dark or light
+                color: textColor)),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -65,9 +40,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       fontSize: kTitleFontSize,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
-                      color: isDark
-                          ? Color(kPrimaryWhiteColor)
-                          : Color(kPrimaryBlackColor),
+                      color: Color(textColor.value),
                     )),
               ),
             ),
@@ -261,9 +234,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
-                                primary: isDark
-                                    ? Color.fromARGB(255, 91, 113, 121)
-                                    : const Color(kPrimaryBlueColor),
+                                primary: const Color(kPrimaryBlueColor),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -278,13 +249,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
                                 await controller.updateUser(userData);
                               },
-                              child: Text(
+                              child: const Text(
                                 'Update Profile',
                                 style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w500,
-                                    color:
-                                        isDark ? Colors.white : Colors.black),
+                                    color: Colors.black),
                               ),
                             ),
                           ),
@@ -303,10 +273,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             },
           ),
         ),
-      ),
-      bottomNavigationBar: CustomNavBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
     );
   }
