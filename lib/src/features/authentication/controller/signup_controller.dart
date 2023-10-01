@@ -17,6 +17,8 @@ class SignUpController extends GetxController {
 
   final userRepo = Get.put(UserRepository());
 
+  get isPasswordVisible => null;
+
   void registerUser(String email, String password) {
     AuthenticationRepository.instance
         .createUserWithEmailAndPassword(email, password);
@@ -34,4 +36,6 @@ class SignUpController extends GetxController {
       await Get.offAll(() => const HomePage());
     }
   }
+
+  void togglePasswordVisibility() {}
 }

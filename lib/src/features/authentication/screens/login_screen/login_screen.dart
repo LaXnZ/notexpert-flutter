@@ -5,15 +5,21 @@ import 'package:notexpert/src/features/authentication/screens/registration_scree
 import 'package:notexpert/src/features/authentication/controller/signin_controller.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     Brightness currentBrightness = Theme.of(context).brightness;
     final controller = Get.put(SignInController());
     final _formKey = GlobalKey<FormState>();
 
+    bool isObsecured = true;
     // Define the text color based on the theme brightness
     Color textColor = currentBrightness == Brightness.dark
         ? Color(kPrimaryWhiteColor) // Use white color for light theme
@@ -111,6 +117,7 @@ class LoginScreen extends StatelessWidget {
                               color:
                                   textColor, // Set the text color based on the theme
                             ),
+                            obscureText: isObsecured,
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.password),
                               labelText: 'Password',
@@ -126,8 +133,17 @@ class LoginScreen extends StatelessWidget {
                                     textColor, // Set the label text color based on the theme
                               ),
                               suffixIcon: IconButton(
-                                onPressed: null,
-                                icon: Icon(Icons.remove_red_eye_sharp),
+                                onPressed: () {
+                                  setState(() {
+                                    isObsecured = !isObsecured;
+                                  });
+                                },
+                                icon: Icon(
+                                  isObsecured
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: textColor.withOpacity(0.5),
+                                ),
                               ),
                             ),
                           ),
