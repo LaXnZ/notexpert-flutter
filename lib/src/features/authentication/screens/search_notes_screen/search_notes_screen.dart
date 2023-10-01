@@ -77,6 +77,8 @@ class _SearchNotesState extends State<SearchNotes> {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -95,7 +97,9 @@ class _SearchNotesState extends State<SearchNotes> {
                       fontSize: kTitleFontSize,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
-                      color: Color(kPrimaryBlackColor),
+                      color: isDark
+                          ? Color(kPrimaryWhiteColor)
+                          : Color(kPrimaryBlackColor),
                     )),
               ),
             ),
@@ -108,7 +112,8 @@ class _SearchNotesState extends State<SearchNotes> {
           Container(
             margin: const EdgeInsets.only(right: 16.0, top: 5),
             decoration: BoxDecoration(
-              color: Colors.grey[200],
+              color:
+                  isDark ? Color.fromRGBO(71, 71, 71, 0.965) : Colors.grey[200],
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: IconButton(
@@ -136,15 +141,18 @@ class _SearchNotesState extends State<SearchNotes> {
                 onChanged: onSearchTextChanged,
                 style: TextStyle(
                   fontSize: 17.0,
-                  color: Color(
-                      kPrimaryBlackColor), // Set the text color based on the theme
+                  color: Color(isDark
+                      ? kPrimaryWhiteColor
+                      : kPrimaryBlackColor), // Set the text color based on the theme
                 ),
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 13.0, horizontal: 20.0),
                   hintText: 'Search notes...',
                   prefixIcon: Icon(Icons.search),
-                  fillColor: Colors.grey[200],
+                  fillColor: isDark
+                      ? Color.fromRGBO(71, 71, 71, 0.965)
+                      : Colors.grey[200],
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50.0),
@@ -163,7 +171,9 @@ class _SearchNotesState extends State<SearchNotes> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     elevation: 0,
-                    color: Color.fromARGB(87, 112, 184, 202),
+                    color: isDark
+                        ? Color.fromARGB(255, 34, 34, 34)
+                        : Color.fromARGB(87, 112, 184, 202),
                     child: ListTile(
                       title: RichText(
                         maxLines: 4,
@@ -173,7 +183,9 @@ class _SearchNotesState extends State<SearchNotes> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
-                            color: Color(kPrimaryBlackColor),
+                            color: isDark
+                                ? const Color.fromARGB(255, 218, 216, 216)
+                                : Color.fromARGB(226, 0, 0, 0),
                           ),
                           children: [
                             TextSpan(
@@ -181,7 +193,9 @@ class _SearchNotesState extends State<SearchNotes> {
                               style: TextStyle(
                                 fontSize: 17.0,
                                 fontWeight: FontWeight.normal,
-                                color: Color(kPrimaryBlackColor),
+                                color: isDark
+                                    ? const Color.fromARGB(255, 218, 216, 216)
+                                    : Color.fromARGB(226, 0, 0, 0),
                               ),
                             ),
                           ],
@@ -194,7 +208,9 @@ class _SearchNotesState extends State<SearchNotes> {
                         style: TextStyle(
                           fontSize: 12.0,
                           fontStyle: FontStyle.italic,
-                          color: Colors.grey.shade700,
+                          color: isDark
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade700,
                         ),
                       ),
                     ),
