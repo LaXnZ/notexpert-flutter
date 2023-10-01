@@ -50,7 +50,7 @@ class _SearchNotesState extends State<SearchNotes> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () => {Get.back()},
+            onPressed: () => {Navigator.of(context).pop()},
             icon: const Icon(Icons.arrow_back_ios_new_rounded,
                 color: Colors.black)),
         title: Row(

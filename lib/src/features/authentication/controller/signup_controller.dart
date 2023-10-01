@@ -22,8 +22,12 @@ class SignUpController extends GetxController {
   }
 
   Future<void> createUser(User user) async {
-    await userRepo.createUser(user);
-
-    Get.to(() => const HomePage());
+    AuthenticationRepository.instance
+        .createUserWithEmailAndPassword(user.email, user.password);
+    // if the user registration is successful, then create the user in the database
+    if (AuthenticationRepository.instance.firebaseUser.value != null) {
+      await userRepo.createUser(user);
+      Get.offAll(() => const HomePage());
+    }
   }
 }
