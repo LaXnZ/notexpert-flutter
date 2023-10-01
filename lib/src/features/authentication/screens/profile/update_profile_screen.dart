@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -60,6 +58,15 @@ class UpdateProfileScreen extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
                   User userData = snapshot.data as User;
+                  final id = TextEditingController(text: userData.id);
+                  final firstname =
+                      TextEditingController(text: userData.firstName);
+                  final lastname =
+                      TextEditingController(text: userData.lastName);
+                  final email = TextEditingController(text: userData.email);
+                  final password =
+                      TextEditingController(text: userData.password);
+
                   return Column(
                     children: [
                       const SizedBox(height: 20.0),
@@ -97,7 +104,7 @@ class UpdateProfileScreen extends StatelessWidget {
                           child: Column(
                         children: [
                           TextFormField(
-                            initialValue: userData.firstName,
+                            controller: firstname,
                             style: TextStyle(
                               fontSize: 14,
                               color: textColor,
@@ -127,7 +134,7 @@ class UpdateProfileScreen extends StatelessWidget {
                             height: 15,
                           ),
                           TextFormField(
-                            initialValue: userData.lastName,
+                            controller: lastname,
                             style: TextStyle(
                               fontSize: 14,
                               color: textColor,
@@ -157,7 +164,7 @@ class UpdateProfileScreen extends StatelessWidget {
                             height: 15,
                           ),
                           TextFormField(
-                            initialValue: userData.email,
+                            controller: email,
                             style: TextStyle(
                               fontSize: 14,
                               color: textColor,
@@ -187,7 +194,7 @@ class UpdateProfileScreen extends StatelessWidget {
                             height: 15,
                           ),
                           TextFormField(
-                            initialValue: userData.password,
+                            controller: password,
                             style: TextStyle(
                               fontSize: 14,
                               color: textColor,
@@ -221,16 +228,26 @@ class UpdateProfileScreen extends StatelessWidget {
                             height: 35,
                           ),
                           SizedBox(
-                            width: 200,
-                            height: 45,
+                            width: 190,
+                            height: 40,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Color.fromARGB(181, 148, 187, 200),
+                                elevation: 0,
+                                primary: const Color(kPrimaryBlueColor),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () async {
+                                final userData = User(
+                                    id: id.text.trim(),
+                                    firstName: firstname.text.trim(),
+                                    lastName: lastname.text.trim(),
+                                    email: email.text.trim(),
+                                    password: password.text.trim());
+
+                                await controller.updateUser(userData);
+                              },
                               child: const Text(
                                 'Update Profile',
                                 style: TextStyle(

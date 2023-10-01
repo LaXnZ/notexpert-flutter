@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notexpert/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:notexpert/src/repository/user_repository/user_repository.dart';
@@ -22,12 +23,15 @@ class SignUpController extends GetxController {
   }
 
   Future<void> createUser(User user) async {
-    AuthenticationRepository.instance
-        .createUserWithEmailAndPassword(user.email, user.password);
-    // if the user registration is successful, then create the user in the database
-    if (AuthenticationRepository.instance.firebaseUser.value != null) {
-      await userRepo.createUser(user);
-      Get.offAll(() => const HomePage());
+    // Check if the user already exists in the database
+    final userData = userRepo.getUser(user.email);
+    userRepo.createUser(user);
+    if (userData == null) {
+      // User doesn't exist, so create a new user
+      registerUser(user.email, user.password);
+
+      // Navigate to the home screen
+      await Get.offAll(() => const HomePage());
     }
   }
 }
