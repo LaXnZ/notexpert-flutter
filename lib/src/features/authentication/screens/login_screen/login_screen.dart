@@ -13,10 +13,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     Brightness currentBrightness = Theme.of(context).brightness;
     var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     final controller = Get.put(SignInController());

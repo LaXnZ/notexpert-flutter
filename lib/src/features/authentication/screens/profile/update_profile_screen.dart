@@ -38,6 +38,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     final controller = Get.put(ProfileController());
     Brightness currentBrightness = Theme.of(context).brightness;
 
@@ -64,7 +65,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       fontSize: kTitleFontSize,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
-                      color: Color(kPrimaryBlackColor),
+                      color: isDark
+                          ? Color(kPrimaryWhiteColor)
+                          : Color(kPrimaryBlackColor),
                     )),
               ),
             ),
@@ -258,7 +261,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
-                                primary: const Color(kPrimaryBlueColor),
+                                primary: isDark
+                                    ? Color.fromARGB(255, 91, 113, 121)
+                                    : const Color(kPrimaryBlueColor),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -273,12 +278,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
                                 await controller.updateUser(userData);
                               },
-                              child: const Text(
+                              child: Text(
                                 'Update Profile',
                                 style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                                    color:
+                                        isDark ? Colors.white : Colors.black),
                               ),
                             ),
                           ),

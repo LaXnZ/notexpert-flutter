@@ -62,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 Get.to(() => const HomePage());
               },
-              icon: Image.asset(kHomePageLogo)),
+              icon: Image.asset(isDark ? kHomePageLogoDark : kHomePageLogo)),
           onPressed: () {},
           iconSize: 90,
           alignment: Alignment.centerLeft,
@@ -80,9 +80,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 AuthenticationRepository.instance.signOut(context);
               },
               iconSize: 35,
-              icon: const Icon(
+              icon: Icon(
                 Icons.logout,
-                color: Color(kPrimaryBlackColor),
+                color: isDark
+                    ? Color(kPrimaryWhiteColor)
+                    : Color(kPrimaryBlackColor),
               ),
             ),
           )
@@ -122,12 +124,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 35,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100.0),
-                                  color:
-                                      kDefaultIconDarkColor.withOpacity(0.5)),
-                              child: const Icon(
+                                  color: isDark
+                                      ? Colors.white.withOpacity(0.3)
+                                      : kDefaultIconDarkColor.withOpacity(0.5)),
+                              child: Icon(
                                 Icons.edit_rounded,
-                                color: Colors.white,
-                                size: 21,
+                                color: isDark ? Colors.white : Colors.black,
+                                size: 25,
                               ),
                             ),
                           )
@@ -138,20 +141,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       Text(
                         firstname + ' ' + lastname,
-                        style: const TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                            color: Color(kPrimaryBlackColor)),
+                        style: TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                          color: isDark
+                              ? Color(kPrimaryWhiteColor)
+                              : Color(kPrimaryBlackColor),
+                        ),
                       ),
                       const SizedBox(
                         height: 3,
                       ),
                       Text(
                         email,
-                        style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: Color(kPrimaryBlackColor)),
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: isDark
+                              ? Color(kPrimaryWhiteColor)
+                              : Color(kPrimaryBlackColor),
+                        ),
                       ),
                       const SizedBox(
                         height: 15,
@@ -171,17 +180,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100.0),
                               color: kDefaultIconDarkColor.withOpacity(0.1)),
-                          child: const Icon(
+                          child: Icon(
                             Icons.person,
-                            color: Color(kPrimaryBlackColor),
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Edit Profile Information',
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color(kPrimaryBlackColor)),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
+                          ),
                         ),
                         trailing: Container(
                           width: 30,
@@ -205,17 +219,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100.0),
                               color: kDefaultIconDarkColor.withOpacity(0.1)),
-                          child: const Icon(
+                          child: Icon(
                             Icons.notifications,
-                            color: Color(kPrimaryBlackColor),
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Notifications',
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color(kPrimaryBlackColor)),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
+                          ),
                         ),
                         trailing: Container(
                           width: 30,
@@ -238,17 +257,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100.0),
                               color: kDefaultIconDarkColor.withOpacity(0.1)),
-                          child: const Icon(
+                          child: Icon(
                             Icons.language,
-                            color: Color(kPrimaryBlackColor),
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Language',
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color(kPrimaryBlackColor)),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
+                          ),
                         ),
                         trailing: Container(
                           width: 30,
@@ -278,17 +302,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100.0),
                               color: kDefaultIconDarkColor.withOpacity(0.1)),
-                          child: const Icon(
+                          child: Icon(
                             Icons.security,
-                            color: Color(kPrimaryBlackColor),
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Security',
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color(kPrimaryBlackColor)),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
+                          ),
                         ),
                         trailing: Container(
                           width: 30,
@@ -311,17 +340,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100.0),
                               color: kDefaultIconDarkColor.withOpacity(0.1)),
-                          child: const Icon(
+                          child: Icon(
                             Icons.colorize,
-                            color: Color(kPrimaryBlackColor),
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Theme',
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color(kPrimaryBlackColor)),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
+                          ),
                         ),
                         trailing: Container(
                           width: 30,
@@ -353,17 +387,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100.0),
                               color: kDefaultIconDarkColor.withOpacity(0.1)),
-                          child: const Icon(
+                          child: Icon(
                             Icons.contact_support_rounded,
-                            color: Color(kPrimaryBlackColor),
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Help & Support',
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color(kPrimaryBlackColor)),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
+                          ),
                         ),
                         trailing: Container(
                           width: 30,
@@ -387,17 +426,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100.0),
                               color: kDefaultIconDarkColor.withOpacity(0.1)),
-                          child: const Icon(
+                          child: Icon(
                             Icons.privacy_tip_rounded,
-                            color: Color(kPrimaryBlackColor),
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Privacy Policy',
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color(kPrimaryBlackColor)),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? Color(kPrimaryWhiteColor)
+                                : Color(kPrimaryBlackColor),
+                          ),
                         ),
                         trailing: Container(
                           width: 30,
