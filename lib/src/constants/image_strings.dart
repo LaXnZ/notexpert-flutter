@@ -10,6 +10,7 @@ const String kUserProfileImage = 'assets/images/user_profile_image.png';
 // app logo paths
 
 const String kHomePageLogo = 'assets/images/homepage_logo.png';
+const String kHomePageLogoDark = 'assets/images/homepage_logo_dark.png';
 const String kLoginLogoLight = 'assets/images/login_logo_light.png';
 const String kLoginLogoDark = 'assets/images/login_logo_dark.png';
 const String kGoogleLogo = 'assets/images/google_logo.png';

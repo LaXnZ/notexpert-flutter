@@ -13,11 +13,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     Brightness currentBrightness = Theme.of(context).brightness;
+    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     final controller = Get.put(SignInController());
-    final _formKey = GlobalKey<FormState>();
 
     bool isObsecured = true;
     // Define the text color based on the theme brightness
@@ -35,16 +37,14 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 colorFilter: ColorFilter.mode(
-                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                  isDark
                       ? Colors.black.withOpacity(0.4)
                       : Colors.white.withOpacity(
                           0.5), // Change the opacity value here (0.5 for 50% opacity)
                   BlendMode.srcOver,
                 ),
                 image: AssetImage(
-                  MediaQuery.of(context).platformBrightness == Brightness.dark
-                      ? kBackgroundImageDark
-                      : kBackgroundImageLight,
+                  isDark ? kBackgroundImageDark : kBackgroundImageLight,
                 ),
                 fit: BoxFit.cover,
               ),
@@ -59,9 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Center(
+                    Center(
                       child: Image(
-                        image: AssetImage(kLoginLogoDark),
+                        image: AssetImage(
+                            isDark ? kLoginLogoDark : kLoginLogoLight),
                       ),
                     ),
                     const SizedBox(

@@ -7,7 +7,6 @@ import 'package:notexpert/src/features/authentication/screens/profile/update_pro
 import 'package:notexpert/src/constants/colors.dart';
 import 'package:notexpert/src/constants/image_strings.dart';
 import 'package:notexpert/src/repository/authentication_repository/authentication_repository.dart';
-
 import '../../../../common_widgets/navbar.dart';
 import '../../controller/profile_controller.dart';
 import '../../models/user.dart';

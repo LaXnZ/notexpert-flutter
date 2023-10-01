@@ -5,7 +5,6 @@ class CustomNavBar extends StatelessWidget {
   final Function(int) onTap;
 
   const CustomNavBar({
-    
     Key? key,
     required this.currentIndex,
     required this.onTap,
@@ -13,23 +12,31 @@ class CustomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
     return BottomNavigationBar(
-      backgroundColor: const Color.fromARGB(255, 199, 224, 233),
+      backgroundColor: isDark
+          ? Color.fromARGB(255, 67, 67, 67)
+          : const Color.fromARGB(255, 199, 224, 233),
       currentIndex: currentIndex,
       onTap: onTap,
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.blue, // Customize the selected item color
+      selectedItemColor: Colors.blue,
       unselectedItemColor: const Color.fromARGB(255, 31, 31, 31),
-      showSelectedLabels: false, // Hide labels
+      showSelectedLabels: false,
       showUnselectedLabels: false,
-      iconSize: 29, // Adjust the icon size as needed
+      iconSize: 29,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(
             Icons.home,
             color: currentIndex == 0
-                ? Colors.blue
-                : const Color.fromARGB(255, 31, 31, 31),
+                ? isDark
+                    ? Color.fromRGBO(132, 95, 238, 25)
+                    : Colors.blue
+                : isDark
+                    ? const Color.fromRGBO(172, 172, 172, 25)
+                    : const Color.fromARGB(255, 31, 31, 31),
           ),
           label: 'Home',
         ),
@@ -37,8 +44,12 @@ class CustomNavBar extends StatelessWidget {
           icon: Icon(
             Icons.search,
             color: currentIndex == 1
-                ? Colors.blue
-                : const Color.fromARGB(255, 31, 31, 31),
+                ? isDark
+                    ? Color.fromRGBO(132, 95, 238, 25)
+                    : Colors.blue
+                : isDark
+                    ? const Color.fromRGBO(172, 172, 172, 25)
+                    : const Color.fromARGB(255, 31, 31, 31),
           ),
           label: 'Search',
         ),
@@ -46,8 +57,12 @@ class CustomNavBar extends StatelessWidget {
           icon: Icon(
             Icons.favorite,
             color: currentIndex == 2
-                ? Colors.blue
-                : const Color.fromARGB(255, 31, 31, 31),
+                ? isDark
+                    ? Color.fromRGBO(132, 95, 238, 25)
+                    : Colors.blue
+                : isDark
+                    ? const Color.fromRGBO(172, 172, 172, 25)
+                    : const Color.fromARGB(255, 31, 31, 31),
           ),
           label: 'Favorites',
         ),
@@ -55,8 +70,12 @@ class CustomNavBar extends StatelessWidget {
           icon: Icon(
             Icons.person,
             color: currentIndex == 3
-                ? Colors.blue
-                : const Color.fromARGB(255, 31, 31, 31),
+                ? isDark
+                    ? Color.fromRGBO(132, 95, 238, 25)
+                    : Colors.blue
+                : isDark
+                    ? const Color.fromRGBO(172, 172, 172, 25)
+                    : const Color.fromARGB(255, 31, 31, 31),
           ),
           label: 'Profile',
         ),
