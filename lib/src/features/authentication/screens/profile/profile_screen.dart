@@ -51,7 +51,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final controller = Get.put(ProfileController());
     var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
-    var textColor = isDark ? kPrimaryWhiteColor : kPrimaryBlackColor;
 
     return Scaffold(
       appBar: AppBar(

@@ -105,10 +105,12 @@ class _EditScreenState extends State<EditScreen> {
                     width: 300,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: FileImage(_selectedImage!),
-                        fit: BoxFit.cover,
-                      ),
+                      image: _selectedImage != null
+                          ? DecorationImage(
+                              image: FileImage(_selectedImage!),
+                              fit: BoxFit.cover,
+                            )
+                          : null,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -222,7 +224,6 @@ class _EditScreenState extends State<EditScreen> {
     final returnedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    if (returnedImage == null) return;
     setState(() {
       _selectedImage = File(returnedImage!.path);
     });
@@ -232,7 +233,6 @@ class _EditScreenState extends State<EditScreen> {
     final returnedImage =
         await ImagePicker().pickImage(source: ImageSource.camera);
 
-    if (returnedImage == null) return;
     setState(() {
       _selectedImage = File(returnedImage!.path);
     });

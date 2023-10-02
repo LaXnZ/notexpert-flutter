@@ -28,7 +28,7 @@ class SignUpController extends GetxController {
     // Check if the user already exists in the database
     final userData = userRepo.getUser(user.email);
     userRepo.createUser(user);
-    if (userData == null) {
+    if (userData == false) {
       // User doesn't exist, so create a new user
       registerUser(user.email, user.password);
 
