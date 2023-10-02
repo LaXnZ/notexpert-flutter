@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 import '../../models/note.dart';
 
 class EditScreen extends StatefulWidget {
@@ -96,19 +95,20 @@ class _EditScreenState extends State<EditScreen> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  Container(
-                    height: 300,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: _selectedImage != null
-                          ? DecorationImage(
-                              image: FileImage(_selectedImage!),
-                              fit: BoxFit.cover,
-                            )
-                          : null,
+                  if (_selectedImage != null)
+                    Container(
+                      height: 300,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: _selectedImage != null
+                            ? DecorationImage(
+                                image: FileImage(_selectedImage!),
+                                fit: BoxFit.cover,
+                              )
+                            : null,
+                      ),
                     ),
-                  ),
                   const SizedBox(height: 10),
                   Align(
                     alignment: Alignment.centerLeft,
