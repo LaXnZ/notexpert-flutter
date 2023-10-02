@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:notexpert/src/common_widgets/navbar.dart';
 import 'package:notexpert/src/features/authentication/models/note.dart';
 import 'package:notexpert/src/constants/image_strings.dart';
-import 'package:notexpert/src/constants/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:notexpert/src/features/authentication/screens/edit_screen/edit_screen.dart';
 import 'package:notexpert/src/features/authentication/screens/profile/profile_screen.dart';
