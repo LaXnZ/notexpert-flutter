@@ -6,6 +6,15 @@
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
 		<string>Notexpert</string>
+
+
+		<key>NSCameraUsageDescription</key>
+		<string>To enhance your note-taking and scanning experience, this app requires access to your device's camera. We use the camera for tasks such as capturing documents and digitizing handwritten notes.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>For your convenience, this app needs access to your photo library to manage scanned documents and images. We use this access to allow you to save, organize, and export scanned documents and notes.</string>
+
+
+
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>

@@ -24,9 +24,7 @@ class UpdateProfileScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => {Navigator.of(context).pop()},
-            icon: Icon(Icons.arrow_back_ios_new_rounded,
-                //change color is dark or light
-                color: textColor)),
+            icon: Icon(Icons.arrow_back_ios_new_rounded, color: textColor)),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

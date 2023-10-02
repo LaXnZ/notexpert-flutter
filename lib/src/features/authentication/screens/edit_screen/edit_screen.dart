@@ -1,7 +1,11 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:notexpert/src/constants/colors.dart';
 import 'package:notexpert/src/features/authentication/screens/homepage_screen/home_screen.dart';
 
 import '../../models/note.dart';
@@ -18,6 +22,8 @@ class _EditScreenState extends State<EditScreen> {
   TextEditingController _titleController = TextEditingController();
   TextEditingController _noteController = TextEditingController();
 
+  File? _selectedImage;
+
   @override
   void initState() {
     if (widget.note != null) {
@@ -29,9 +35,11 @@ class _EditScreenState extends State<EditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
     return Scaffold(
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
+          padding: const EdgeInsets.fromLTRB(5, 50, 16, 0),
           child: Column(
             children: [
               Row(
@@ -45,21 +53,22 @@ class _EditScreenState extends State<EditScreen> {
                       icon: Container(
                         width: 40,
                         height: 40,
-                        child: const Icon(
+                        child: Icon(
                           Icons.arrow_back_ios_new_rounded,
-                          color: Colors.black,
+                          color: isDark ? Colors.white : Colors.black,
                         ),
                       ))
                 ],
               ),
               Expanded(
                   child: ListView(
+                padding: const EdgeInsets.fromLTRB(18, 10, 0, 0),
                 children: [
                   TextField(
                     controller: _titleController,
                     style: TextStyle(
                       fontSize: 30,
-                      color: Colors.black,
+                      color: isDark ? Colors.white : Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                     decoration: InputDecoration(
@@ -75,7 +84,9 @@ class _EditScreenState extends State<EditScreen> {
                   TextField(
                     controller: _noteController,
                     style: TextStyle(
-                      color: const Color.fromARGB(226, 0, 0, 0),
+                      color: isDark
+                          ? Color.fromARGB(178, 255, 255, 255)
+                          : const Color.fromARGB(178, 0, 0, 0),
                       fontWeight: FontWeight.bold,
                     ),
                     maxLines: null,
@@ -85,6 +96,106 @@ class _EditScreenState extends State<EditScreen> {
                       hintStyle: const TextStyle(
                         color: Color.fromARGB(179, 158, 158, 158),
                         fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Container(
+                    height: 300,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: FileImage(_selectedImage!),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        _pickImageFromGallery();
+                      },
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(1),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: isDark
+                                    ? Color.fromARGB(40, 255, 255, 255)
+                                    : Color.fromARGB(40, 0, 0, 0),
+                              ),
+                              child: Icon(
+                                Icons.add,
+                                color: isDark
+                                    ? Color.fromARGB(190, 255, 255, 255)
+                                    : Color.fromARGB(190, 0, 0, 0),
+                                size: 30,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              'Add a image',
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w400,
+                                color: isDark
+                                    ? const Color.fromARGB(209, 255, 255, 255)
+                                    : Color.fromARGB(190, 0, 0, 0),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        _pickImageFromCamera();
+                      },
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(1),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: isDark
+                                    ? Color.fromARGB(40, 255, 255, 255)
+                                    : Color.fromARGB(40, 0, 0, 0),
+                              ),
+                              child: Icon(
+                                Icons.add,
+                                color: isDark
+                                    ? Color.fromARGB(190, 255, 255, 255)
+                                    : Color.fromARGB(190, 0, 0, 0),
+                                size: 30,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              'Scan a document',
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w400,
+                                color: isDark
+                                    ? const Color.fromARGB(209, 255, 255, 255)
+                                    : Color.fromARGB(190, 0, 0, 0),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   )
@@ -99,9 +210,31 @@ class _EditScreenState extends State<EditScreen> {
                 context, [_titleController.text, _noteController.text]);
           },
           elevation: 1,
-          backgroundColor: Color.fromARGB(96, 2, 70, 97),
+          backgroundColor: isDark
+              ? const Color.fromARGB(78, 255, 255, 255)
+              : Color.fromARGB(96, 2, 70, 97),
           child: Icon(Icons.save,
               size: 30, color: Color.fromARGB(255, 255, 255, 255)),
         ));
+  }
+
+  Future _pickImageFromGallery() async {
+    final returnedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (returnedImage == null) return;
+    setState(() {
+      _selectedImage = File(returnedImage!.path);
+    });
+  }
+
+  Future _pickImageFromCamera() async {
+    final returnedImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+
+    if (returnedImage == null) return;
+    setState(() {
+      _selectedImage = File(returnedImage!.path);
+    });
   }
 }
