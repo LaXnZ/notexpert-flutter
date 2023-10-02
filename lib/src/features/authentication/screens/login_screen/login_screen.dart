@@ -222,7 +222,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               image: AssetImage(kGoogleLogo),
                               width: 20.0,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              SignInController.instance.googleSignIn();
+                            },
                             label: const Text(
                               'Google',
                               style: TextStyle(

@@ -229,12 +229,14 @@ class UpdateProfileScreen extends StatelessWidget {
                             height: 35,
                           ),
                           SizedBox(
-                            width: 190,
-                            height: 40,
+                            width: double.infinity,
+                            height: 55,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                primary: const Color(kPrimaryBlueColor),
+                                elevation: 2,
+                                primary: currentBrightness == Brightness.dark
+                                    ? Color.fromARGB(255, 0, 0, 0)
+                                    : Color.fromARGB(255, 180, 218, 231),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -249,12 +251,14 @@ class UpdateProfileScreen extends StatelessWidget {
 
                                 await controller.updateUser(userData);
                               },
-                              child: const Text(
+                              child: Text(
                                 'Update Profile',
                                 style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                                    color: currentBrightness == Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black),
                               ),
                             ),
                           ),
